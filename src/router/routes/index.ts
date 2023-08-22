@@ -1,8 +1,8 @@
 import type { AppRouteRecordRaw, AppRouteModule } from '/@/router/types';
 
 import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '/@/router/routes/basic';
-import thirdPartyServer from './third-party-server';
-import wordChipsServer from './word-chips-server';
+import allInOne from './allInOne';
+import wordChips from './wordChips';
 
 import { mainOutRoutes } from './mainOut';
 import { PageEnum } from '/@/enums/pageEnum';
@@ -20,7 +20,7 @@ import { t } from '/@/hooks/web/useI18n';
 // });
 
 // export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList];
-export const asyncRoutes = [thirdPartyServer, wordChipsServer];
+export const asyncRoutes = [allInOne, wordChips];
 
 // 根路由
 export const RootRoute: AppRouteRecordRaw = {

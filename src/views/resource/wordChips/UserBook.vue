@@ -1,5 +1,5 @@
 <template>
-  <ResourceLayout name="dictionary" :columns="columns" />
+  <ResourceLayout database="wordChips" name="userBook" :columns="columns" />
 </template>
 
 <script setup lang="ts">
@@ -10,26 +10,23 @@
     {
       title: 'ID',
       dataIndex: 'id',
+      fixed: 'left',
     },
     {
-      title: 'bookId',
-      dataIndex: 'bookId',
-    },
-    {
-      title: '字典',
+      title: '名称',
       dataIndex: 'name',
     },
     {
-      title: '单词数量',
-      dataIndex: 'count',
+      title: '用户ID',
+      dataIndex: 'userId',
     },
     {
-      title: '创建时间',
-      dataIndex: 'createdAt',
+      title: '每次学习',
+      dataIndex: 'learnLimit',
     },
     {
-      title: '修改时间',
-      dataIndex: 'updatedAt',
+      title: '单词学习次数',
+      dataIndex: 'learnedLevel',
     },
   ]);
 </script>

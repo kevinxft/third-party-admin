@@ -2,17 +2,17 @@ import type { AppRouteModule } from '/@/router/types';
 
 import { LAYOUT } from '/@/router/constant';
 
-const importResource = (name) => () => import(`/@/views/resource/third-party-server/${name}.vue`);
+const importResource = (name) => () => import(`/@/views/resource/allInOne/${name}.vue`);
 
 const permission: AppRouteModule = {
-  path: '/third-party',
-  name: 'ThirdParty',
+  path: '/allInOne',
+  name: 'AllInOne',
   component: LAYOUT,
-  redirect: '/third-party/word',
+  redirect: '/allInOne/word',
   meta: {
     orderNo: 2000,
     icon: 'ion:menu-outline',
-    title: '第三方服务',
+    title: 'All In One',
   },
   children: [
     {
@@ -28,15 +28,15 @@ const permission: AppRouteModule = {
       name: 'Dictionary',
       component: importResource('Dictionary'),
       meta: {
-        title: '字典',
+        title: '词典',
       },
     },
     {
       path: 'user',
-      name: 'ThirdPartyUser',
-      component: importResource('User'),
+      name: 'WeixinUser',
+      component: importResource('WeixinUser'),
       meta: {
-        title: '用户',
+        title: '微信用户',
       },
     },
   ],

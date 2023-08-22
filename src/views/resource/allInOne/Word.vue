@@ -1,5 +1,5 @@
 <template>
-  <ResourceLayout name="word" :columns="columns" />
+  <ResourceLayout database="allInOne" name="word" :columns="columns" />
 </template>
 
 <script setup lang="ts">

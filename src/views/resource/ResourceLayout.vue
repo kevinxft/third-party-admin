@@ -1,36 +1,39 @@
 <template>
   <div class="p-4">
     <BasicTable
-      :dataSource="data"
       :canResize="true"
-      :loading="loading"
       :columns="columns"
-      :pagination="pagination"
+      :pagination="{ pageSize: 20, defaultPageSize: 20, pageSizeOptions: ['10', '20', '30', '50'] }"
       showTableSetting
       @columns-change="handleColumnChange"
-      @change="handleChange"
-    />
+      @register="registerTable"
+      :api="getTableData"
+    >
+      <template #bodyCell="cellData">
+        <slot name="cell" v-bind="{ ...cellData, methods: { reload: _reload } }"> </slot>
+      </template>
+    </BasicTable>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref, reactive } from 'vue';
-  import { BasicTable } from '/@/components/Table';
+  import { BasicTable, useTable } from '/@/components/Table';
   import { getList } from '../../api/resource';
 
-  const loading = ref(false);
-  const data = ref([]);
-  const pagination = ref<any>({
-    pageSize: 20,
-    defaultPageSize: 20,
-    pageSizeOptions: [10, 20, 30, 50],
-  });
-  const query = reactive({
-    page: 1,
-    limit: 20,
-  });
+  const [registerTable, { reload }] = useTable();
+
+  const _reload = () => {
+    console.log('reload');
+    reload();
+  };
+
+  defineExpose({ reload: _reload });
 
   const props = defineProps({
+    database: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -40,27 +43,13 @@
       required: true,
     },
   });
-  onMounted(async () => {
-    getTableData();
-  });
 
-  const getTableData = async () => {
-    const res = await getList(props.name, query);
-    data.value = res.data;
-    pagination.value = {
-      ...pagination.value,
-      total: res.total,
-    };
+  const getTableData = async (params) => {
+    const res = await getList(props.database, props.name, params);
+    return res.data;
   };
 
   function handleColumnChange(data) {
     console.log('ColumnChanged', data);
   }
-
-  function handleChange(data) {
-    query.limit = data.pageSize;
-    query.page = data.current;
-    getTableData();
-  }
 </script>
-../../api/resource

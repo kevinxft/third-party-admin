@@ -2,13 +2,13 @@ import type { AppRouteModule } from '/@/router/types';
 
 import { LAYOUT } from '/@/router/constant';
 
-const importResource = (name) => () => import(`/@/views/resource/word-chips-server/${name}.vue`);
+const importResource = (name) => () => import(`/@/views/resource/wordChips/${name}.vue`);
 
 const permission: AppRouteModule = {
-  path: '/word-chips',
+  path: '/wordChips',
   name: 'WordChips',
   component: LAYOUT,
-  redirect: '/word-chips/word',
+  redirect: '/wordChips/word',
   meta: {
     orderNo: 1000,
     icon: 'ion:menu-outline',

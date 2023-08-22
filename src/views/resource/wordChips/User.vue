@@ -1,5 +1,5 @@
 <template>
-  <ResourceLayout name="user-book" :columns="columns" />
+  <ResourceLayout database="wordChips" name="user" :columns="columns" />
 </template>
 
 <script setup lang="ts">
@@ -11,10 +11,6 @@
       title: 'ID',
       dataIndex: 'id',
       fixed: 'left',
-    },
-    {
-      title: 'BookId',
-      dataIndex: 'bookId',
     },
   ]);
 </script>
