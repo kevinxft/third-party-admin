@@ -2,8 +2,6 @@ import type { AppRouteModule } from '/@/router/types';
 
 import { LAYOUT } from '/@/router/constant';
 
-const importResource = (name) => () => import(`/@/views/resource/allInOne/${name}.vue`);
-
 const permission: AppRouteModule = {
   path: '/allInOne',
   name: 'AllInOne',
@@ -16,9 +14,17 @@ const permission: AppRouteModule = {
   },
   children: [
     {
+      path: 'admin',
+      name: 'Admin',
+      component: () => import(`/@/views/resource/allInOne/Admin.vue`),
+      meta: {
+        title: '管理员',
+      },
+    },
+    {
       path: 'word',
       name: 'Word',
-      component: importResource('Word'),
+      component: () => import(`/@/views/resource/allInOne/Word.vue`),
       meta: {
         title: '单词',
       },
@@ -26,7 +32,7 @@ const permission: AppRouteModule = {
     {
       path: 'dictionary',
       name: 'Dictionary',
-      component: importResource('Dictionary'),
+      component: () => import(`/@/views/resource/allInOne/Dictionary.vue`),
       meta: {
         title: '词典',
       },
@@ -34,7 +40,7 @@ const permission: AppRouteModule = {
     {
       path: 'user',
       name: 'WeixinUser',
-      component: importResource('WeixinUser'),
+      component: () => import(`/@/views/resource/allInOne/WeixinUser.vue`),
       meta: {
         title: '微信用户',
       },
