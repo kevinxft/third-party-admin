@@ -43,11 +43,7 @@
 
   const columns = reactive([
     {
-      title: 'ID',
-      dataIndex: 'id',
-    },
-    {
-      title: 'dictId',
+      title: '词典ID',
       dataIndex: 'dictId',
     },
     {
@@ -69,6 +65,7 @@
     {
       title: '操作',
       key: 'operation',
+      width: 200,
     },
   ]);
 
@@ -94,7 +91,7 @@
   }
 
   async function onCreate() {
-    await addDict(getFieldsValue());
+    await addDict(getFieldsValue() as { name: string; dictId: string });
     await setFieldsValue({ name: '', dictId: '' });
     await closeModal();
     resource.value.reload();

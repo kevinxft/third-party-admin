@@ -28,5 +28,9 @@
       title: '单词学习次数',
       dataIndex: 'learnedLevel',
     },
+    {
+      title: 'apiKey',
+      dataIndex: 'apiKey',
+    },
   ]);
 </script>

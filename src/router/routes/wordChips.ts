@@ -2,7 +2,7 @@ import type { AppRouteModule } from '/@/router/types';
 
 import { LAYOUT } from '/@/router/constant';
 
-const importResource = (name) => () => import(`/@/views/resource/wordChips/${name}.vue`);
+// const importResource = (name) => import(`/@/views/resource/wordChips/${name}.vue`);
 
 const permission: AppRouteModule = {
   path: '/wordChips',
@@ -18,7 +18,7 @@ const permission: AppRouteModule = {
     {
       path: 'user',
       name: 'User',
-      component: importResource('User'),
+      component: () => import(`/@/views/resource/wordChips/User.vue`),
       meta: {
         title: '用户',
       },
@@ -26,7 +26,7 @@ const permission: AppRouteModule = {
     {
       path: 'userWord',
       name: 'UserWord',
-      component: importResource('UserWord'),
+      component: () => import(`/@/views/resource/wordChips/UserWord.vue`),
       meta: {
         title: '用户单词',
       },
@@ -34,7 +34,7 @@ const permission: AppRouteModule = {
     {
       path: 'userBook',
       name: 'UserBook',
-      component: importResource('UserBook'),
+      component: () => import(`/@/views/resource/wordChips/UserBook.vue`),
       meta: {
         title: '用户单词本',
       },

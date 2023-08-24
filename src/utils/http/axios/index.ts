@@ -274,7 +274,9 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
     ),
   );
 }
-export const defHttp = createAxios();
+export const defHttp = createAxios({
+  authenticationScheme: 'Bearer',
+});
 
 // other api url
 // export const otherHttp = createAxios({

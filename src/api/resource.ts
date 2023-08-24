@@ -11,8 +11,6 @@ const resourceRequest = (database: string, name: string, query = {}, method = 'g
   if (str) {
     url = `${url}?${str}`;
   }
-  console.log(url);
-
   return defHttp[method]({ url }, { isTransformResponse: false });
 };
 

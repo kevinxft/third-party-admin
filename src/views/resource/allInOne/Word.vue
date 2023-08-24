@@ -8,13 +8,9 @@
 
   const columns = reactive([
     {
-      title: 'ID',
-      dataIndex: 'id',
-      fixed: 'left',
-    },
-    {
-      title: 'BookId',
-      dataIndex: 'bookId',
+      title: '词典Id',
+      dataIndex: 'dictId',
+      width: 200,
     },
     {
       title: '单词',
@@ -34,11 +30,11 @@
     },
     {
       title: '短语',
-      dataIndex: 'phrases',
+      dataIndex: 'sentences',
     },
     {
-      title: '近义词',
-      dataIndex: 'synos',
+      title: '近义',
+      dataIndex: 'rels',
     },
   ]);
 </script>

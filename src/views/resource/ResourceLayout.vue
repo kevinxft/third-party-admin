@@ -3,7 +3,12 @@
     <BasicTable
       :canResize="true"
       :columns="columns"
-      :pagination="{ pageSize: 20, defaultPageSize: 20, pageSizeOptions: ['10', '20', '30', '50'] }"
+      :pagination="{
+        total: total,
+        pageSize: 20,
+        defaultPageSize: 20,
+        pageSizeOptions: ['10', '20', '30', '50'],
+      }"
       showTableSetting
       @columns-change="handleColumnChange"
       @register="registerTable"
@@ -17,10 +22,12 @@
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue';
   import { BasicTable, useTable } from '/@/components/Table';
   import { getList } from '../../api/resource';
 
   const [registerTable, { reload }] = useTable();
+  const total = ref(0);
 
   const _reload = () => {
     console.log('reload');
@@ -46,7 +53,7 @@
 
   const getTableData = async (params) => {
     const res = await getList(props.database, props.name, params);
-    return res.data;
+    return res;
   };
 
   function handleColumnChange(data) {

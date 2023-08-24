@@ -4,7 +4,7 @@ import { LoginParams, LoginResultModel, GetUserInfoModel } from './model/userMod
 import { ErrorMessageMode } from '/#/axios';
 
 enum Api {
-  Login = '/login',
+  Login = '/auth/login',
   Logout = '/logout',
   GetUserInfo = '/getUserInfo',
   GetPermCode = '/getPermCode',
@@ -14,31 +14,20 @@ enum Api {
 /**
  * @description: user login api
  */
-export function loginApi() {
-  const fakeUserInfo = {
-    userId: '1',
-    username: 'vben',
-    realName: 'Vben Admin',
-    desc: 'manager',
-    password: '123456',
-    token: 'fakeToken1',
-    roles: [
-      {
-        roleName: 'Super Admin',
-        value: 'super',
+export function loginApi({ username, password, mode }) {
+  return defHttp.post(
+    {
+      url: Api.Login,
+      data: {
+        username,
+        password,
       },
-    ],
-  };
-  return Promise.resolve(fakeUserInfo);
-  // return defHttp.post<LoginResultModel>(
-  //   {
-  //     url: Api.Login,
-  //     params,
-  //   },
-  //   {
-  //     errorMessageMode: mode,
-  //   },
-  // );
+    },
+    {
+      isTransformResponse: false,
+      errorMessageMode: mode,
+    },
+  );
 }
 
 /**
