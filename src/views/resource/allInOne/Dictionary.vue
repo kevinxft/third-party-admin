@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="flex mx4 mt4 p2 bg-white">
+  <ResourceLayout ref="resource" database="allInOne" table="dictionary" :columns="columns">
+    <template #toolbar>
       <a-button class="ml-auto" @click="onShowModal">新增</a-button>
       <BasicModal
         v-bind="$attrs"
@@ -16,25 +16,21 @@
           :showResetButton="false"
         />
       </BasicModal>
-    </div>
-    <ResourceLayout ref="resource" database="allInOne" name="dictionary" :columns="columns">
-      <template #cell="data">
-        <template v-if="data.column.key === 'operation'">
-          <div class="flex">
-            <EditDictionary class="mr4" :data="data" />
-            <UploadDict :data="data" />
-          </div>
-        </template>
+    </template>
+    <template #cell="data">
+      <template v-if="data.column.key === 'operation'">
+        <div class="flex">
+          <UploadDict :data="data" />
+        </div>
       </template>
-    </ResourceLayout>
-  </div>
+    </template>
+  </ResourceLayout>
 </template>
 
 <script setup lang="ts">
   import { reactive, ref } from 'vue';
   import ResourceLayout from './../ResourceLayout.vue';
-  import UploadDict from './UploadDict.vue';
-  import EditDictionary from './DictionaryForm.vue';
+  import UploadDict from './common/UploadDict.vue';
   import { BasicModal, useModal } from '/@/components/Modal';
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { addDict } from '/@/api/resource';
@@ -49,6 +45,7 @@
     {
       title: '字典',
       dataIndex: 'name',
+      editRow: true,
     },
     {
       title: '单词数量',

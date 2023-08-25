@@ -1,6 +1,6 @@
 import { defHttp } from '../utils/http/axios';
 
-const resourceRequest = (database: string, name: string, query = {}, method = 'get') => {
+const reqList = (database: string, name: string, query = {}) => {
   let str = Object.keys(query).reduce((acc, cur) => {
     acc += `&${cur}=${query[cur]}`;
     return acc;
@@ -11,12 +11,32 @@ const resourceRequest = (database: string, name: string, query = {}, method = 'g
   if (str) {
     url = `${url}?${str}`;
   }
-  return defHttp[method]({ url }, { isTransformResponse: false });
+  return defHttp.get({ url });
 };
 
-export const getList = (database, name, query = {}) =>
-  resourceRequest(database, name, query, 'get');
+const req = (database: string, name: string, id: string | number, method = 'get', data = {}) => {
+  let url = `/resource/${database}/${name}`;
+  if (id) {
+    url += `/${id}`;
+  }
 
+  return defHttp[method]({
+    url,
+    data,
+  });
+};
+
+export const getList = (database, name, query = {}) => reqList(database, name, query);
+
+export const deleteOne = (database, name, id) => req(database, name, id, 'delete');
+
+export const getOne = (database, name, id) => req(database, name, id);
+
+export const updateOne = (database, name, id, data) => req(database, name, id, 'patch', data);
+
+export const createOne = (database, name, data) => req(database, name, '', 'post', data);
+
+// dict
 export const updateDict = (data: { dictId: string; name: string }) =>
   defHttp.put({ url: '/dict/update', data }, { isTransformResponse: false });
 

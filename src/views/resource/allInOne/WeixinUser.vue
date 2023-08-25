@@ -1,5 +1,5 @@
 <template>
-  <ResourceLayout database="allInOne" name="weixinUser" :columns="columns" />
+  <ResourceLayout database="allInOne" table="weixinUser" :columns="columns" />
 </template>
 
 <script setup lang="ts">

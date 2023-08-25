@@ -39,6 +39,14 @@ const permission: AppRouteModule = {
         title: '用户单词本',
       },
     },
+    {
+      path: 'lesson',
+      name: 'Lesson',
+      component: () => import(`/@/views/resource/wordChips/Lesson.vue`),
+      meta: {
+        title: '课程',
+      },
+    },
   ],
 };
 

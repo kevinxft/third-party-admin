@@ -14,6 +14,14 @@ const permission: AppRouteModule = {
   },
   children: [
     {
+      path: 'user',
+      name: 'WeixinUser',
+      component: () => import(`/@/views/resource/allInOne/WeixinUser.vue`),
+      meta: {
+        title: '微信用户',
+      },
+    },
+    {
       path: 'admin',
       name: 'Admin',
       component: () => import(`/@/views/resource/allInOne/Admin.vue`),
@@ -35,14 +43,6 @@ const permission: AppRouteModule = {
       component: () => import(`/@/views/resource/allInOne/Dictionary.vue`),
       meta: {
         title: '词典',
-      },
-    },
-    {
-      path: 'user',
-      name: 'WeixinUser',
-      component: () => import(`/@/views/resource/allInOne/WeixinUser.vue`),
-      meta: {
-        title: '微信用户',
       },
     },
   ],
