@@ -1,5 +1,7 @@
 <template>
-  <ResourceLayout database="wordChips" table="userWord" :columns="columns" />
+  <ResourceLayout database="wordChips" table="lesson" :columns="columns">
+    <template #search> fuck </template>
+  </ResourceLayout>
 </template>
 
 <script setup lang="ts">
@@ -8,20 +10,20 @@
 
   const columns = reactive([
     {
-      title: 'BookId',
-      dataIndex: 'bookId',
+      title: 'ID',
+      dataIndex: 'id',
     },
     {
-      title: 'name',
+      title: '名称',
       dataIndex: 'name',
     },
     {
-      title: '熟悉等级',
-      dataIndex: 'level',
+      title: '主题',
+      dataIndex: 'subject',
     },
     {
-      title: '查询次数',
-      dataIndex: 'searchTimes',
+      title: '描述',
+      dataIndex: 'description',
     },
     {
       title: '创建时间',

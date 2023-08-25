@@ -1,5 +1,5 @@
 <template>
-  <ResourceLayout database="allInOne" name="word" :columns="columns" />
+  <ResourceLayout database="allInOne" table="word" :columns="columns" />
 </template>
 
 <script setup lang="ts">
@@ -10,11 +10,13 @@
     {
       title: '词典Id',
       dataIndex: 'dictId',
+      search: true,
       width: 200,
     },
     {
       title: '单词',
       dataIndex: 'name',
+      search: true,
     },
     {
       title: '美英',
@@ -27,6 +29,10 @@
     {
       title: '翻译',
       dataIndex: 'trans',
+    },
+    {
+      title: '翻译2',
+      dataIndex: 'synos',
     },
     {
       title: '短语',

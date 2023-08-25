@@ -1,5 +1,5 @@
 <template>
-  <ResourceLayout database="wordChips" name="user" :columns="columns" />
+  <ResourceLayout database="wordChips" table="user" :columns="columns" />
 </template>
 
 <script setup lang="ts">
