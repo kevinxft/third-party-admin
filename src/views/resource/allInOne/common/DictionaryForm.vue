@@ -46,7 +46,7 @@
 
   async function onUpdate() {
     await updateDict({
-      bookId: props.data?.record.dictId,
+      dictId: props.data?.record.dictId,
       name: getFieldsValue()['name'],
     });
     await props.data?.methods.reload();

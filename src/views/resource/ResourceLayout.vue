@@ -1,5 +1,11 @@
 <template>
-  <BasicTable @register="registerTable">
+  <BasicTable
+    @register="registerTable"
+    :pagination="{
+      defaultPageSize: 20,
+      pageSize: 20,
+    }"
+  >
     <template #form-custom> <slot name="search"></slot> </template>
     <template #bodyCell="cellData">
       <slot name="cell" v-bind="{ ...cellData, methods: { reload } }"> </slot>
@@ -8,6 +14,12 @@
       </template>
     </template>
     <template #toolbar>
+      <create-form
+        :database="props.database"
+        :table="props.table"
+        :columns="columns"
+        :reload="reload"
+      />
       <slot name="toolbar"></slot>
     </template>
   </BasicTable>
@@ -15,10 +27,11 @@
 
 <script setup lang="ts">
   import { BasicTable, useTable, TableAction, ActionItem } from '/@/components/Table';
+  import CreateForm from './CreateForm.vue';
   import { getList, deleteOne, updateOne } from '../../api/resource';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { cloneDeep } from 'lodash-es';
-  import { ref, toRaw } from 'vue';
+  import { ref } from 'vue';
 
   const cols = ref<any[]>([]);
   const currentEditKeyRef = ref('');
@@ -38,7 +51,7 @@
       required: true,
     },
     actions: {
-      type: Array<any>,
+      type: Array<string>,
       default: ['delete', 'edit'],
     },
   });

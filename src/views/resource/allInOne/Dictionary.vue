@@ -1,27 +1,8 @@
 <template>
   <ResourceLayout ref="resource" database="allInOne" table="dictionary" :columns="columns">
-    <template #toolbar>
-      <a-button class="ml-auto" @click="onShowModal">新增</a-button>
-      <BasicModal
-        v-bind="$attrs"
-        okText="新增"
-        @ok="onCreate"
-        @register="registerModal"
-        :maskClosable="false"
-      >
-        <BasicForm
-          class="flex"
-          @register="registerForm"
-          :showSubmitButton="false"
-          :showResetButton="false"
-        />
-      </BasicModal>
-    </template>
     <template #cell="data">
       <template v-if="data.column.key === 'operation'">
-        <div class="flex">
-          <UploadDict :data="data" />
-        </div>
+        <UploadDict :data="data" />
       </template>
     </template>
   </ResourceLayout>
@@ -31,9 +12,6 @@
   import { reactive, ref } from 'vue';
   import ResourceLayout from './../ResourceLayout.vue';
   import UploadDict from './common/UploadDict.vue';
-  import { BasicModal, useModal } from '/@/components/Modal';
-  import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
-  import { addDict } from '/@/api/resource';
 
   const resource = ref();
 
@@ -41,9 +19,10 @@
     {
       title: '词典ID',
       dataIndex: 'dictId',
+      createRow: true,
     },
     {
-      title: '字典',
+      title: '词典名称',
       dataIndex: 'name',
       editRow: true,
     },
@@ -60,39 +39,8 @@
       dataIndex: 'updatedAt',
     },
     {
-      title: '操作',
+      title: '管理',
       key: 'operation',
-      width: 200,
     },
   ]);
-
-  const schemas: FormSchema[] = [
-    {
-      field: 'name',
-      component: 'Input',
-      label: '词典名称',
-    },
-    {
-      field: 'dictId',
-      component: 'Input',
-      label: '词典ID',
-    },
-  ];
-
-  const [registerForm, { getFieldsValue, setFieldsValue }] = useForm({
-    schemas,
-  });
-
-  async function onShowModal() {
-    await openModal();
-  }
-
-  async function onCreate() {
-    await addDict(getFieldsValue() as { name: string; dictId: string });
-    await setFieldsValue({ name: '', dictId: '' });
-    await closeModal();
-    resource.value.reload();
-  }
-
-  const [registerModal, { openModal, closeModal }] = useModal();
 </script>
